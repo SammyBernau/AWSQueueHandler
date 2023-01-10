@@ -36,6 +36,11 @@ public class Query {
         return with("INSERT INTO " + tableName + " VALUES (" + sValues + ")");
     }
 
+    public Query create(String tableName, Object... columns) {
+        String sColumns = Arrays.stream(columns).map(Object::toString).collect(Collectors.joining(","));
+        return with("CREATE TABLE IF NOT EXISTS " + tableName + "("+sColumns+")");
+    }
+
     public static Query build() {
         return new Query();
     }
